@@ -1,3 +1,4 @@
+"""Functions and classes for creating Schemas."""
 import collections
 import inspect
 import re
@@ -307,15 +308,15 @@ class Schema(object):
         invalid_msg = invalid_msg or 'mapping value'
 
         # Keys that may be required
-        all_required_keys = set(key for key in schema
-                                if key is not Extra and
-                                ((self.required and not isinstance(key, (Optional, Remove))) or
-                                 isinstance(key, Required)))
+        all_required_keys = {key for key in schema
+                             if key is not Extra
+                             and ((self.required and not isinstance(key, (Optional, Remove)))
+                                  or isinstance(key, Required))}
 
         # Keys that may have defaults
-        all_default_keys = set(key for key in schema
-                               if isinstance(key, Required) or
-                               isinstance(key, Optional))
+        all_default_keys = {key for key in schema
+                            if isinstance(key, Required)
+                            or isinstance(key, Optional)}
 
         _compiled_schema = {}
         for skey, svalue in iteritems(schema):
@@ -746,7 +747,7 @@ class Schema(object):
 
         # build a map that takes the key literals to the needed objects
         # literal -> Required|Optional|literal
-        result_key_map = dict((key_literal(key), key) for key in result)
+        result_key_map = {key_literal(key): key for key in result}
 
         # for each item in the extension schema, replace duplicates
         # or add new keys
@@ -1240,9 +1241,9 @@ def _args_to_dict(func, args):
         arg_names = func.func_code.co_varnames[:arg_count]
 
     arg_value_list = list(args)
-    arguments = dict((arg_name, arg_value_list[i])
-                     for i, arg_name in enumerate(arg_names)
-                     if i < len(arg_value_list))
+    arguments = {arg_name: arg_value_list[i]
+                 for i, arg_name in enumerate(arg_names)
+                 if i < len(arg_value_list)}
     return arguments
 
 

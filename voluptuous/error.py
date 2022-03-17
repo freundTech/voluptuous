@@ -102,7 +102,7 @@ class ValueInvalid(Invalid):
 
 
 class ContainsInvalid(Invalid):
-    """List does not contain item"""
+    """List does not contain item."""
 
 
 class ScalarInvalid(Invalid):
@@ -191,9 +191,7 @@ class ExactSequenceInvalid(Invalid):
 
 class NotEnoughValid(Invalid):
     """The value did not pass enough validations."""
-    pass
 
 
 class TooManyValid(Invalid):
     """The value passed more than expected validations."""
-    pass

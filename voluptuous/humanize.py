@@ -17,7 +17,7 @@ def _nested_getitem(data, path):
 
 
 def humanize_error(data, validation_error, max_sub_error_length=MAX_VALIDATION_ERROR_ITEM_LENGTH):
-    """ Provide a more helpful + complete validation error message than that provided automatically
+    """Provide a more helpful + complete validation error message than that provided automatically
     Invalid and MultipleInvalid do not include the offending value in error messages,
     and MultipleInvalid.__str__ only provides the first error.
     """

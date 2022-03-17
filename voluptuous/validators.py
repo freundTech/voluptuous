@@ -441,7 +441,7 @@ def Email(v):
         if not (USER_REGEX.fullmatch(user_part) and DOMAIN_REGEX.fullmatch(domain_part)):
             raise EmailInvalid("Invalid email address")
         return v
-    except:
+    except:  # noqa: E722
         raise ValueError
 
 
@@ -460,7 +460,7 @@ def FqdnUrl(v):
         if "." not in parsed_url.netloc:
             raise UrlInvalid("must have a domain name in URL")
         return v
-    except:
+    except:  # noqa: 722
         raise ValueError
 
 
@@ -477,7 +477,7 @@ def Url(v):
     try:
         _url_validation(v)
         return v
-    except:
+    except:  # noqa: 722
         raise ValueError
 
 
@@ -740,8 +740,8 @@ class In(object):
         except TypeError:
             check = True
         if check:
-            raise InInvalid(self.msg or 
-                            'value must be one of {}'.format(sorted(self.container)))
+            raise InInvalid(self.msg
+                            or 'value must be one of {}'.format(sorted(self.container)))
         return v
 
     def __repr__(self):
@@ -761,8 +761,8 @@ class NotIn(object):
         except TypeError:
             check = True
         if check:
-            raise NotInInvalid(self.msg or 
-                               'value must not be one of {}'.format(sorted(self.container)))
+            raise NotInInvalid(self.msg
+                               or 'value must not be one of {}'.format(sorted(self.container)))
         return v
 
     def __repr__(self):
@@ -868,7 +868,7 @@ class Unique(object):
                 self.msg or 'contains unhashable elements: {0}'.format(e))
         if len(set_v) != len(v):
             seen = set()
-            dupes = list(set(x for x in v if x in seen or seen.add(x)))
+            dupes = [{x for x in v if x in seen or seen.add(x)}]
             raise Invalid(
                 self.msg or 'contains duplicate items: {0}'.format(dupes))
         return v
@@ -1025,6 +1025,7 @@ class Number(object):
 
 class SomeOf(_WithSubValidators):
     """Value must pass at least some validations, determined by the given parameter.
+
     Optionally, number of passed validations can be capped.
 
     The output of each validator is passed as input to the next.
