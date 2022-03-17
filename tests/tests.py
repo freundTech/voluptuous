@@ -934,7 +934,7 @@ def test_unicode_as_key():
     else:
         text_type = unicode
     schema = Schema({text_type: int})
-    schema({u("foobar"): 1})
+    schema({"foobar": 1})
 
 
 def test_number_validation_with_string():

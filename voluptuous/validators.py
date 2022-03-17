@@ -1,7 +1,7 @@
 import os
 import re
 import datetime
-import sys
+import urllib.parse as urlparse
 from functools import wraps
 from decimal import Decimal, InvalidOperation
 from enum import Enum
@@ -13,12 +13,6 @@ from voluptuous.error import (MultipleInvalid, CoerceInvalid, TrueInvalid, False
                               DateInvalid, InInvalid, TypeInvalid, NotInInvalid, ContainsInvalid, NotEnoughValid,
                               TooManyValid)
 
-if sys.version_info >= (3,):
-    import urllib.parse as urlparse
-
-    basestring = str
-else:
-    import urlparse
 
 # Taken from https://github.com/kvesteri/validators/blob/master/validators/email.py
 USER_REGEX = re.compile(
@@ -174,7 +168,7 @@ def Boolean(v):
     ... except MultipleInvalid as e:
     ...   assert isinstance(e.errors[0], BooleanInvalid)
     """
-    if isinstance(v, basestring):
+    if isinstance(v, str):
         v = v.lower()
         if v in ('1', 'true', 'yes', 'on', 'enable'):
             return True
@@ -369,7 +363,7 @@ class Match(object):
     """
 
     def __init__(self, pattern, msg=None):
-        if isinstance(pattern, basestring):
+        if isinstance(pattern, str):
             pattern = re.compile(pattern)
         self.pattern = pattern
         self.msg = msg
@@ -397,7 +391,7 @@ class Replace(object):
     """
 
     def __init__(self, pattern, substitution, msg=None):
-        if isinstance(pattern, basestring):
+        if isinstance(pattern, str):
             pattern = re.compile(pattern)
         self.pattern = pattern
         self.substitution = substitution
