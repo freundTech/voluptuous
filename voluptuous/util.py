@@ -1,5 +1,3 @@
-import sys
-
 from voluptuous.error import LiteralInvalid, TypeInvalid, Invalid
 from voluptuous.schema_builder import Schema, default_factory, raises
 from voluptuous import validators

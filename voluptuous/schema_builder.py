@@ -1,5 +1,4 @@
 """Functions and classes for creating Schemas."""
-import collections
 import inspect
 import re
 from collections.abc import Mapping
@@ -1056,15 +1055,15 @@ class Exclusive(Optional):
     >>> msg = 'Please, use only one type of authentication at the same time.'
     >>> schema = Schema({
     ... Exclusive('classic', 'auth', msg=msg):{
-    ...     Required('email'): basestring,
-    ...     Required('password'): basestring
+    ...     Required('email'): str,
+    ...     Required('password'): str
     ...     },
     ... Exclusive('internal', 'auth', msg=msg):{
-    ...     Required('secret_key'): basestring
+    ...     Required('secret_key'): str
     ...     },
     ... Exclusive('social', 'auth', msg=msg):{
-    ...     Required('social_network'): basestring,
-    ...     Required('token'): basestring
+    ...     Required('social_network'): str,
+    ...     Required('token'): str
     ...     }
     ... })
 
