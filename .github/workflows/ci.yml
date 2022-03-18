@@ -26,6 +26,9 @@ jobs:
           - name: Test suite with python 3.9
             python-version: "3.9"
             toxenv: "py39"
+          - name: Test suite with python 3.10
+            python-version: "3.10"
+            toxenv: "py310"
           - name: Run flake8
             python-version: "3.9"
             toxenv: "flake8"
