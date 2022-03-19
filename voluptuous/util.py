@@ -55,7 +55,7 @@ def Strip(v):
     return str(v).strip()
 
 
-class DefaultTo(object):
+class DefaultTo:
     """Sets a value to default_value if none provided.
 
     >>> s = Schema(DefaultTo(42))
@@ -79,7 +79,7 @@ class DefaultTo(object):
         return 'DefaultTo(%s)' % (self.default_value(),)
 
 
-class SetTo(object):
+class SetTo:
     """Set a value, ignoring any previous value.
 
     >>> s = Schema(validators.Any(int, SetTo(42)))
@@ -99,7 +99,7 @@ class SetTo(object):
         return 'SetTo(%s)' % (self.value(),)
 
 
-class Set(object):
+class Set:
     """Convert a list into a set.
 
     >>> s = Schema(Set())
@@ -126,7 +126,7 @@ class Set(object):
         return 'Set()'
 
 
-class Literal(object):
+class Literal:
     def __init__(self, lit):
         self.lit = lit
 

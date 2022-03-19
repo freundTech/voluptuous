@@ -59,7 +59,7 @@ def truth(f):
     return check
 
 
-class Coerce(object):
+class Coerce:
     """Coerce a value to a type.
 
     If the type constructor throws a ValueError or TypeError, the value
@@ -178,7 +178,7 @@ def Boolean(v):
     return bool(v)
 
 
-class _WithSubValidators(object):
+class _WithSubValidators:
     """Base class for validators that use sub-validators.
 
     Special class to use as a parent class for validators using sub-validators.
@@ -343,7 +343,7 @@ class All(_WithSubValidators):
 And = All
 
 
-class Match(object):
+class Match:
     """Value must be a string that matches the regular expression.
 
     >>> validate = Schema(Match(r'^0x[A-F0-9]+$'))
@@ -381,7 +381,7 @@ class Match(object):
         return 'Match(%r, msg=%r)' % (self.pattern.pattern, self.msg)
 
 
-class Replace(object):
+class Replace:
     """Regex substitution.
 
     >>> validate = Schema(All(Replace('you', 'I'),
@@ -555,7 +555,7 @@ def Maybe(validator, msg=None):
     return Any(None, validator, msg=msg)
 
 
-class Range(object):
+class Range:
     """Limit a value to a range.
 
     Either min or max may be omitted.
@@ -618,7 +618,7 @@ class Range(object):
                                                self.msg))
 
 
-class Clamp(object):
+class Clamp:
     """Clamp a value to a range.
 
     Either min or max may be omitted.
@@ -654,7 +654,7 @@ class Clamp(object):
         return 'Clamp(min=%s, max=%s)' % (self.min, self.max)
 
 
-class Length(object):
+class Length:
     """The length of a value must be in a certain range."""
 
     def __init__(self, min=None, max=None, msg=None):
@@ -681,7 +681,7 @@ class Length(object):
         return 'Length(min=%s, max=%s)' % (self.min, self.max)
 
 
-class Datetime(object):
+class Datetime:
     """Validate that the value matches the datetime format."""
 
     DEFAULT_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
@@ -721,7 +721,7 @@ class Date(Datetime):
         return 'Date(format=%s)' % self.format
 
 
-class In(object):
+class In:
     """Validate that a value is in a collection."""
 
     def __init__(self, container, msg=None):
@@ -742,7 +742,7 @@ class In(object):
         return 'In(%s)' % (self.container,)
 
 
-class NotIn(object):
+class NotIn:
     """Validate that a value is not in a collection."""
 
     def __init__(self, container, msg=None):
@@ -763,7 +763,7 @@ class NotIn(object):
         return 'NotIn(%s)' % (self.container,)
 
 
-class Contains(object):
+class Contains:
     """Validate that the given schema element is in the sequence being validated.
 
     >>> s = Contains(1)
@@ -790,7 +790,7 @@ class Contains(object):
         return 'Contains(%s)' % (self.item,)
 
 
-class ExactSequence(object):
+class ExactSequence:
     """Matches each element in a sequence against the corresponding element in
     the validators.
 
@@ -825,7 +825,7 @@ class ExactSequence(object):
                                                   for v in self.validators))
 
 
-class Unique(object):
+class Unique:
     """Ensure an iterable does not contain duplicate items.
 
     Only iterables convertable to a set are supported (native types and
@@ -871,7 +871,7 @@ class Unique(object):
         return 'Unique()'
 
 
-class Equal(object):
+class Equal:
     """Ensure that value matches target.
 
     >>> s = Schema(Equal(1))
@@ -900,7 +900,7 @@ class Equal(object):
         return 'Equal({})'.format(self.target)
 
 
-class Unordered(object):
+class Unordered:
     """Ensures sequence contains values in unspecified order.
 
     >>> s = Schema(Unordered([2, 1]))
@@ -957,7 +957,7 @@ class Unordered(object):
         return 'Unordered([{}])'.format(", ".join(repr(v) for v in self.validators))
 
 
-class Number(object):
+class Number:
     """
     Verify the number of digits that are present in the number(Precision),
     and the decimal places(Scale).

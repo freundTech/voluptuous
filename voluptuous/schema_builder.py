@@ -3,21 +3,10 @@ import inspect
 import re
 from collections.abc import Mapping
 from functools import wraps
-import sys
 from contextlib import contextmanager
 
 import itertools
 from voluptuous import error as er
-
-"""
-    long = int
-    unicode = str
-    basestring = str
-    ifilter = filter
-
-    def iteritems(d):
-        return d.items()
-"""
 
 
 """Schema validation for Python data structures.
@@ -109,7 +98,7 @@ def _isnamedtuple(obj):
 primitive_types = (str, bool, int, float)
 
 
-class Undefined(object):
+class Undefined:
     def __nonzero__(self):
         return False
 
@@ -151,7 +140,7 @@ def Extra(_):
 extra = Extra
 
 
-class Schema(object):
+class Schema:
     """A validation schema.
 
     The schema is a Python tree-like structure where nodes are pattern
@@ -436,7 +425,7 @@ class Schema(object):
 
         For example:
 
-            >>> class Structure(object):
+            >>> class Structure:
             ...     def __init__(self, one=None, three=None):
             ...         self.one = one
             ...         self.three = three
@@ -899,7 +888,7 @@ def _iterate_object(obj):
                 yield (key, getattr(obj, key))
 
 
-class Msg(object):
+class Msg:
     """Report a user-friendly message if a schema fails to validate.
 
     >>> validate = Schema(
@@ -969,7 +958,7 @@ class VirtualPathComponent(str):
 # Markers.py
 
 
-class Marker(object):
+class Marker:
     """Mark nodes for special treatment."""
 
     def __init__(self, schema_, msg=None, description=None):
@@ -1225,12 +1214,8 @@ def message(default=None, cls=None):
 
 def _args_to_dict(func, args):
     """Returns argument names as values as key-value pairs."""
-    if sys.version_info >= (3, 0):
-        arg_count = func.__code__.co_argcount
-        arg_names = func.__code__.co_varnames[:arg_count]
-    else:
-        arg_count = func.func_code.co_argcount
-        arg_names = func.func_code.co_varnames[:arg_count]
+    arg_count = func.__code__.co_argcount
+    arg_names = func.__code__.co_varnames[:arg_count]
 
     arg_value_list = list(args)
     arguments = {arg_name: arg_value_list[i]

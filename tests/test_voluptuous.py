@@ -538,7 +538,7 @@ def test_range_excludes_string():
 
 
 def test_range_excludes_unordered_object():
-    class MyObject(object):
+    class MyObject:
         pass
 
     s = Schema(Range(min=0, max=10))
