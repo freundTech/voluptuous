@@ -862,7 +862,7 @@ class Unique(object):
                 self.msg or 'contains unhashable elements: {0}'.format(e))
         if len(set_v) != len(v):
             seen = set()
-            dupes = [{x for x in v if x in seen or seen.add(x)}]
+            dupes = list({x for x in v if x in seen or seen.add(x)})
             raise Invalid(
                 self.msg or 'contains duplicate items: {0}'.format(dupes))
         return v
